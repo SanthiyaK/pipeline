@@ -1,30 +1,10 @@
 ---
-- hosts: all
-  become: yes
+# This playbook prints a simple debug message
+- name: Echo 
+  hosts: 127.0.0.1
+  connection: local
+
   tasks:
-  - name: Chenking ping
-    ping:
-  - name: Update packages
-    apt:
-      name: apache2
-      update_cache: yes
-      state: present
-  - name: restart apache2 server
-    service:
-      name: apache2
-      enable: yes
-      state: restarted
-  - name: install php module
-    apt:
-      name: "{{ item }}"
-      state: present
-    with_items:
-     - php
-     - libapache2-mod-php5
-     - php-mcrypt
-     - php-mysql
-  - name: restart apache2 afetr restart
-    service:
-      name: apache2
-      enabled: yes
-      state: restarted
+  - name: Print debug message
+    debug:
+      msg: Hello, world!
